@@ -18,7 +18,7 @@
 4) sudo mkdir -p /mnt/common_volume/grafana/{grafana-config,grafana-data,prometheus-data,loki-data,promtail-data} &&
 
 5) sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana} && \
-touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
+touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \   
 
 6) touch /mnt/common_volume/grafana/grafana-config/grafana.ini &&
 
@@ -31,6 +31,17 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
 Заходим на сайт Local host:3000
 Через admin, admin
 
+На сайте заходим в Dashboards, следом в Create Dashboard, следом Add visualization, следом Configure a new date source.
+
+Из предложенных выбираем Prometheus после этого прописываем в строке Connection http://prometheus:9090
+
+В  строке Authentication выбираем из предложенных Basic authentication, следом заходим через admin, admin
+
+Дальше прожимаем save+test
+
+Дальше импортируем 
+
+Около кнопки пишем 1080
 Далее пишем другие команды
 1) yum install curl
 2) COMVER=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
