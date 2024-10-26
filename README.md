@@ -17,18 +17,16 @@
 
 4) sudo mkdir -p /mnt/common_volume/grafana/{grafana-config,grafana-data,prometheus-data,loki-data,promtail-data} &&
 
-5) sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana}
-
-6) sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana} && \
+5) sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana} && \
 touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
 
-7) touch /mnt/common_volume/grafana/grafana-config/grafana.ini &&
+6) touch /mnt/common_volume/grafana/grafana-config/grafana.ini &&
 
-8) cp config/* /mnt/common_volume/swarm/grafana/config/ &&
+7) cp config/* /mnt/common_volume/swarm/grafana/config/ &&
 
-9) mv grafana.yaml docker-compose.yaml &&
+8) mv grafana.yaml docker-compose.yaml &&
 
-10)  sudo docker compose up -d
+9)  sudo docker compose up -d
 
 Заходим на сайт Local host:3000
 Через admin, admin
