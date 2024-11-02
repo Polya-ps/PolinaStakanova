@@ -75,3 +75,6 @@ cd grafana_starck_for_docker/
 sudo vi docker-compose.yaml
 
 В открывшейся строке мы удаляем предложенное и втсавляем из папки config код
+
+После в комнадной строке ниже пишем :wq!
+
