@@ -96,3 +96,5 @@ sudo vi docker-compose.yaml
 15. Возвращаемся ы графану
 16. В открытом окне в строке переделываем на code, в строке Metrics browser вставляем OILCOINT_metric1
       ![image](https://github.com/user-attachments/assets/656b2cab-e1d9-439d-aa09-0b93ee93600e)
+17. Обновляем
+![image](https://github.com/user-attachments/assets/847ba0f6-3581-4a91-a04e-b1f94a0ec339)
