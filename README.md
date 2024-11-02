@@ -10,6 +10,7 @@
 
 1) git clone https://github.com/skl256/grafana_stack_for_docker.git 
    после вписания этой команды спрашивают об установлении пакета [N/y] вибираем y
+   
 ![image](https://github.com/user-attachments/assets/a094b1e1-fbae-4aff-ad44-a19c78b5d4e1)
 
 2) cd grafana_stack_for_docker
@@ -34,7 +35,7 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
 8) mv grafana.yaml docker-compose.yaml 
 ![image](https://github.com/user-attachments/assets/0b54a2eb-2a08-47f1-bb4f-b80e08d039a6)
 
-10)  sudo docker compose up -d
+9)  sudo docker compose up -d
 ![image](https://github.com/user-attachments/assets/0c570ab8-a834-451d-a2a9-01df103301cc)
 ![image](https://github.com/user-attachments/assets/39bf2dfa-9e11-4095-8283-0710cab17667)
 
