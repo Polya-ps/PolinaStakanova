@@ -67,3 +67,11 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
 Find and import dashboards for common applications at grafana.com/dashboards: 1860  //ждем кнопку Load
 Select Prometheus
 ждем кнопку "Import"
+
+Возвращаемся в командную строку и прописываем: 
+
+cd grafana_starck_for_docker/
+
+sudo vi docker-compose.yaml
+
+В открывшейся строке мы удаляем предложенное и втсавляем из папки config код
