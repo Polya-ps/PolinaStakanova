@@ -76,12 +76,10 @@ services:
     #secrets:
     #  - node_exporter_password
     #  - grafana_prometheus_password
-
     command:
       - "--config.file=/etc/prometheus/prometheus.yaml"
       - "--web.config.file=/etc/prometheus/web-config.yaml"
       - "--storage.tsdb.retention.time=7d"
-
     deploy:
       mode: replicated
       replicas: 1
@@ -105,5 +103,44 @@ services:
       - "--promscrape.config=/etc/prometheus/prometheus.yml"
       - "--remoteWrite.url=http://victoriametrics:8428/api/v1/write"
     restart: always
+  # VictoriaMetrics instance, a single process responsible for
+  # storing metrics and serve read requests.
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics:v1.105.0
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    volumes:
+      - vmdata:/storage
+    command:
+      - "--storageDataPath=/storage"
+      - "--graphiteListenAddr=:2003"
+      - "--opentsdbListenAddr=:4242"
+      - "--httpListenAddr=:8428"
+      - "--influxListenAddr=:8089"
+      - "--vmalert.proxyURL=http://vmalert:8880"
+    restart: always
 
-  # VictoriaMetrics instance, a
+volumes:
+  vmagentdata: {}
+  vmdata: {}
+  grafanadata: {}
+networks:
+  vm_net:
+
+# Uncomment for using docker secrets
+# create docker secret first: docker secret create [OPTIONS] SECRET [file|-]
+# https://docs.docker.com/engine/reference/commandline/secret_create/
+# if you create secret from stdin use Ctrl+D after input, do not use Enter
+#secrets:
+#  grafana_database_password:
+#    external: true
+#  node_exporter_password:
+#    external: true
+#  grafana_prometheus_password:
+#    external: true
