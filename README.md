@@ -78,3 +78,21 @@ sudo vi docker-compose.yaml
 
 После в комнадной строке ниже пишем :wq!
 
+Прописываем:
+1. docker compose up -d
+2. Заходим в графану
+3. Заходим в Connections
+4. В поиске вбиваем Prometheus
+5. В правом верхнем углу будет кнопка "Add new data source"
+6. В строке Connection вставляем htpp://victoriametrics:8428
+7. Пролистываем вниз и нажимаем кнопку Save test
+8. Заходим в Dashboard
+9. Нажимаем в New
+10. Выбираем из предложенного New Dashboard
+11. Выбираем созданную
+12. Возвращаемся в комнадную строку и прописываем:
+13. curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'
+14. echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus
+15. Возвращаемся ы графану
+16. В открытом окне в строке переделываем на code, в строке Metrics browser вставляем OILCOINT_metric1
+      ![image](https://github.com/user-attachments/assets/656b2cab-e1d9-439d-aa09-0b93ee93600e)
