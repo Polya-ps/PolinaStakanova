@@ -96,13 +96,13 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 **В паке config прописан весь код docker-compose.yaml**
 
-**Далее прописываем:
-**
-`cd /mnt/common_volume/swarm/grafana/config 
+**Далее прописываем:**
 
-sudo vi prometheus.yaml`
+`cd /mnt/common_volume/swarm/grafana/config `
 
-**исправить targets: на exporter:9100**
+`sudo vi prometheus.yaml`
+
+исправить targets: **на exporter:9100**
 
 **Grafana**
 
