@@ -121,7 +121,7 @@ _**В паке config прописан весь код docker-compose.yaml**_
 
 `sudo vi prometheus.yaml`
 
-исправить targets: _**на exporter:9100**_
+- исправить targets: _**на exporter:9100**_
 
 ## **Grafana**
 
