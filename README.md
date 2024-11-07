@@ -6,7 +6,7 @@
 
 Иметь образ Linux, добаывить побольше ядер и опертивной паямяти.
 
-**Далее переходим к установке docker с использованием grafana, вводим следующий набор команд:**
+## **Далее переходим к установке docker с использованием grafana, вводим следующий набор команд:**
 
 1) `git clone https://github.com/skl256/grafana_stack_for_docker.git `
    после вписания этой команды спрашивают об установлении пакета [N/y] вибираем y
@@ -68,7 +68,7 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 ![image](https://github.com/user-attachments/assets/0b0f5862-e030-4dc3-bdc6-e4e6d5f8e5b1)
 
-**Установка и настройка Docker**
+## **Установка и настройка Docker**
 
 1) `sudo wget -P /etc/yum.repos.d/ https://download.docker.com/linux/centos/docker-ce.repo
 `
@@ -84,17 +84,36 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 4) `sudo docker compose up -d`
 
-**После установки Docker пишем sudo vi docker-compose.yaml**
+## **После установки Docker пишем sudo vi docker-compose.yaml**
 
-Нас перекинет в текстовый редактор
+_Нас перекинет в текстовый редактор, где:_
 
-Чтобы изменить что-то в редакторе тегов, нажмите insert на клавиатуре
+- Чтобы изменить что-то в редакторе тегов, нажмите insert на клавиатуре
 
-Чтобы сохранить что-то в этом документе, нажмите Esc и введите :wq! В этом текстовом редакторе мы должны поставить node-exporter после services
-
-![image](https://github.com/user-attachments/assets/952e275f-fb2c-492f-be88-a2bb6845a59b)
-
-**В паке config прописан весь код docker-compose.yaml**
+- Чтобы сохранить что-то в этом документе, нажмите Esc и введите :wq! В этом текстовом редакторе мы должны поставить node-exporter после services
+```
+ node-exporter:
+    image: prom/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    container_name: exporter
+    hostname: exporter
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points
+      - ^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)
+    ports:
+      - 9100:9100
+    restart: unless-stopped
+    environment:
+      TZ: "Europe/Moscow"
+    networks:
+      - default
+```
+_**В паке config прописан весь код docker-compose.yaml**_
 
 **Далее прописываем:**
 
@@ -102,55 +121,93 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 `sudo vi prometheus.yaml`
 
-исправить targets: **на exporter:9100**
+исправить targets: _**на exporter:9100**_
 
-**Grafana**
+## **Grafana**
 
-Заходим на сайт **Local host:3000**
+1) Заходим на сайт **Local host:3000**
 
-Через **admin**
+- Через **admin**
 
-На сайте заходим в Dashboards, следом в Create Dashboard, следом Add visualization, следом Configure a new date source.
+2) На сайте заходим в Dashboards, следом в Create Dashboard, следом Add visualization, следом Configure a new date source.
 
-Из предложенных **выбираем Prometheus** после этого прописываем **в строке Connection http://prometheus:9090**
+- Из предложенных _**выбираем Prometheus**_ после этого прописываем **_в строке Connection_ http://prometheus:9090**
 
-В  строке Authentication выбираем из предложенных Basic authentication, следом заходим через admin, admin
+3) В строке Authentication выбираем из предложенных Basic authentication, следом заходим через имя admin, пароль admin
 
-Дальше прожимаем save+test
-
-Дальше импортируем 
-
-Find and import dashboards for common applications at grafana.com/dashboards: 1860  //ждем кнопку Load
+- Дальше нажимаем _**save+test**_
+ 
+4) В меню выбираем вкладку Dashboards и создаем Dashboard
+   
+- ждем кнопку "Import"   
+- Find and import dashboards for common applications at grafana.com/dashboards: 1860  //ждем кнопку Load
 Select Prometheus
-ждем кнопку "Import"
 
-Возвращаемся в командную строку и прописываем: 
+![image](https://github.com/user-attachments/assets/c837ac4e-59f8-492a-a0f4-439be2074df1)
 
-cd grafana_starck_for_docker/
+## **VictoriaMetrics**
 
-sudo vi docker-compose.yaml
+1) Для начала изменим docker-compose.yaml:
 
-В открывшейся строке мы удаляем предложенное и втсавляем из папки config код
+`cd grafana_stack_for_docker`
 
-После в комнадной строке ниже пишем :wq!
+`sudo vi docker-compose.yaml`
 
-Прописываем:
-1. docker compose up -d
-2. Заходим в графану
-3. Заходим в Connections
-4. В поиске вбиваем Prometheus
-5. В правом верхнем углу будет кнопка "Add new data source"
-6. В строке Connection вставляем htpp://victoriametrics:8428
-7. Пролистываем вниз и нажимаем кнопку Save test
-8. Заходим в Dashboard
-9. Нажимаем в New
-10. Выбираем из предложенного New Dashboard
-11. Выбираем созданную
-12. Возвращаемся в комнадную строку и прописываем:
-13. curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'
-14. echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus
-15. Возвращаемся ы графану
-16. В открытом окне в строке переделываем на code, в строке Metrics browser вставляем OILCOINT_metric1
+2) После чего в в самом текстовом редакторе после prometheus вставляем
+```
+   vmagent:
+    container_name: vmagent
+    image: victoriametrics/vmagent:v1.105.0
+    depends_on:
+      - "victoriametrics"
+    ports:
+      - 8429:8429
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--remoteWrite.url=http://victoriametrics:8428/api/v1/write"
+    restart: always
+  # VictoriaMetrics instance, a single process responsible for
+  # storing metrics and serve read requests.
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics:v1.105.0
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    volumes:
+      - vmdata:/storage
+    command:
+      - "--storageDataPath=/storage"
+      - "--graphiteListenAddr=:2003"
+      - "--opentsdbListenAddr=:4242"
+      - "--httpListenAddr=:8428"
+      - "--influxListenAddr=:8089"
+      - "--vmalert.proxyURL=http://vmalert:8880"
+    restart: always
+```
+_Сохраняем и заходим в графану_
+
+1) Заходим в Connections
+2) В поиске вбиваем Prometheus
+-  В правом верхнем углу будет кнопка "Add new data source"
+-  В строке Connection вставляем htpp://victoriametrics:8428 и заменяем на имя Vika
+-  Пролистываем вниз и нажимаем кнопку Save test
+2)  Заходим в Dashboard
+- Нажимаем в New
+- Выбираем из предложенного New Dashboard
+- Выбираем созданную
+3) Возвращаемся в комнадную строку и прописываем:
+- curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'
+- echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus
+4) Возвращаемся в графану 
+5) В открытом окне в строке переделываем на code, в строке Metrics browser вставляем **OILCOINT_metric1**
       ![image](https://github.com/user-attachments/assets/656b2cab-e1d9-439d-aa09-0b93ee93600e)
 17. Обновляем
 ![image](https://github.com/user-attachments/assets/847ba0f6-3581-4a91-a04e-b1f94a0ec339)
