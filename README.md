@@ -1,29 +1,33 @@
-# PolinaStakanova
+# Polina Stakanova
 
-Методичка 
+Перед началом установки, нужно установить Linux Oracle на VirtualBox, для этого выполним ряд действий:
 
 Создаем виртуальную машину. В "образ ISO" на диске Student, в папке К-ИСП-49,выбираем папку Давыдов АА и там лежит документ.
 
-При создании делаем процессов побольше, памяти.
+Иметь образ Linux, добаывить побольше ядер и опертивной паямяти.
 
-Когда загрузилась машина мы прописываем команды 
+Далее переходим к установке docker с использованием grafana, вводим следующий набор команд:
 
-1) git clone https://github.com/skl256/grafana_stack_for_docker.git 
+1) `git clone https://github.com/skl256/grafana_stack_for_docker.git `
    после вписания этой команды спрашивают об установлении пакета [N/y] вибираем y
    
 ![image](https://github.com/user-attachments/assets/a094b1e1-fbae-4aff-ad44-a19c78b5d4e1)
 
-2) cd grafana_stack_for_docker
+2) `cd grafana_stack_for_docker`
+   
   ![image](https://github.com/user-attachments/assets/936bb14a-6479-4ea1-a7b2-bd6087586682)
  
-3) sudo mkdir -p /mnt/common_volume/swarm/grafana/config
-   ![image](https://github.com/user-attachments/assets/e8c8078e-1cf6-4019-8136-2af990990800)
+3) `sudo mkdir -p /mnt/common_volume/swarm/grafana/config`
 
-4) sudo mkdir -p /mnt/common_volume/grafana/{grafana-config,grafana-data,prometheus-data,loki-data,promtail-data} 
+    ![image](https://github.com/user-attachments/assets/e8c8078e-1cf6-4019-8136-2af990990800)
+
+4) `sudo mkdir -p /mnt/common_volume/grafana/{grafana-config,grafana-data,prometheus-data,loki-data,promtail-data} `
+
 ![image](https://github.com/user-attachments/assets/6a9bd0fc-2e22-4b64-a6d4-131036525bde)
 
-sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana} && \
-touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
+5) `sudo chown -R $(id -u):$(id -g) {/mnt/common_volume/swarm/grafana/config,/mnt/common_volume/grafana} && \
+touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
+
 ![image](https://github.com/user-attachments/assets/126e9fe3-bf9f-4a42-8884-1f38a7372c4c)
 
 6) touch /mnt/common_volume/grafana/grafana-config/grafana.ini 
@@ -36,7 +40,9 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \
 ![image](https://github.com/user-attachments/assets/0b54a2eb-2a08-47f1-bb4f-b80e08d039a6)
 
 9)  sudo docker compose up -d
+
 ![image](https://github.com/user-attachments/assets/0c570ab8-a834-451d-a2a9-01df103301cc)
+
 ![image](https://github.com/user-attachments/assets/39bf2dfa-9e11-4095-8283-0710cab17667)
 
 Далее пишем другие команды
