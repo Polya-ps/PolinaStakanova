@@ -52,7 +52,6 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 1) `sudo yum install curl`
 
-
 ![image](https://github.com/user-attachments/assets/eb9a4a4f-72aa-4a9d-98a2-e95d0a903aa3)
 
 2) `COMVER=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)`
@@ -73,6 +72,7 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 1) `sudo wget -P /etc/yum.repos.d/ https://download.docker.com/linux/centos/docker-ce.repo
 `
+
 ![image](https://github.com/user-attachments/assets/f8041f63-d355-46f9-8208-6e40a871597d)
 
 2) ` sudo yum install docker-ce docker-ce`
