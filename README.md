@@ -69,26 +69,50 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 ![image](https://github.com/user-attachments/assets/0b0f5862-e030-4dc3-bdc6-e4e6d5f8e5b1)
 
 **Установка и настройка Docker**
+
 1) `sudo wget -P /etc/yum.repos.d/ https://download.docker.com/linux/centos/docker-ce.repo
 `
 ![image](https://github.com/user-attachments/assets/f8041f63-d355-46f9-8208-6e40a871597d)
 
-2)` sudo yum install docker-ce docker-ce`
+2) ` sudo yum install docker-ce docker-ce`
+
 ![image](https://github.com/user-attachments/assets/a51b6314-c1cf-4dc2-8a11-fa2f73299701)
+
 ![image](https://github.com/user-attachments/assets/c8756496-b0e2-47a1-b168-cd00747e5bde)
 
 3) `sudo systemctl enable docker --now`
 
 4) `sudo docker compose up -d`
 
-![image](https://github.com/user-attachments/assets/755275c4-d0fa-49b6-a939-09c776d50eec)
+**После установки Docker пишем sudo vi docker-compose.yaml**
 
-   Заходим на сайт Local host:3000
-Через admin, admin
+Нас перекинет в текстовый редактор
+
+Чтобы изменить что-то в редакторе тегов, нажмите insert на клавиатуре
+
+Чтобы сохранить что-то в этом документе, нажмите Esc и введите :wq! В этом текстовом редакторе мы должны поставить node-exporter после services
+
+![image](https://github.com/user-attachments/assets/952e275f-fb2c-492f-be88-a2bb6845a59b)
+
+**В паке config прописан весь код docker-compose.yaml**
+
+**Далее прописываем:
+**
+`cd /mnt/common_volume/swarm/grafana/config 
+
+sudo vi prometheus.yaml`
+
+**исправить targets: на exporter:9100**
+
+**Grafana**
+
+Заходим на сайт **Local host:3000**
+
+Через **admin**
 
 На сайте заходим в Dashboards, следом в Create Dashboard, следом Add visualization, следом Configure a new date source.
 
-Из предложенных выбираем Prometheus после этого прописываем в строке Connection http://prometheus:9090
+Из предложенных **выбираем Prometheus** после этого прописываем **в строке Connection http://prometheus:9090**
 
 В  строке Authentication выбираем из предложенных Basic authentication, следом заходим через admin, admin
 
