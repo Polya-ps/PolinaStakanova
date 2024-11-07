@@ -195,19 +195,29 @@ Select Prometheus
 _Сохраняем и заходим в графану_
 
 1) Заходим в Connections
+
 2) В поиске вбиваем Prometheus
 -  В правом верхнем углу будет кнопка "Add new data source"
 -  В строке Connection вставляем htpp://victoriametrics:8428 и заменяем на имя Vika
 -  Пролистываем вниз и нажимаем кнопку Save test
+
 2)  Заходим в Dashboard
 - Нажимаем в New
 - Выбираем из предложенного New Dashboard
 - Выбираем созданную
+
 3) Возвращаемся в комнадную строку и прописываем:
-- curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'
-- echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus
-4) Возвращаемся в графану 
+
+- `curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'`
+
+- `echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus`
+
+4) Возвращаемся в графану
+   
 5) В открытом окне в строке переделываем на code, в строке Metrics browser вставляем **OILCOINT_metric1**
-      ![image](https://github.com/user-attachments/assets/656b2cab-e1d9-439d-aa09-0b93ee93600e)
-17. Обновляем
+
+![image](https://github.com/user-attachments/assets/656b2cab-e1d9-439d-aa09-0b93ee93600e)
+
+6) Обновляем
+  
 ![image](https://github.com/user-attachments/assets/847ba0f6-3581-4a91-a04e-b1f94a0ec339)
