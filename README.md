@@ -52,6 +52,7 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 
 1) `sudo yum install curl`
 
+
 ![image](https://github.com/user-attachments/assets/eb9a4a4f-72aa-4a9d-98a2-e95d0a903aa3)
 
 2) `COMVER=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)`
