@@ -31,15 +31,18 @@ touch /mnt/common_volume/grafana/grafana-config/grafana.ini && \ `
 ![image](https://github.com/user-attachments/assets/126e9fe3-bf9f-4a42-8884-1f38a7372c4c)
 
 6) touch /mnt/common_volume/grafana/grafana-config/grafana.ini 
+
    ![image](https://github.com/user-attachments/assets/45042295-f2ab-40cd-a2ef-634106663b1b)
 
-7) cp config/* /mnt/common_volume/swarm/grafana/config/ 
+8) cp config/* /mnt/common_volume/swarm/grafana/config/ 
+
 ![image](https://github.com/user-attachments/assets/8f05b63c-c981-411b-a943-91f91fac8e07)
 
-8) mv grafana.yaml docker-compose.yaml 
+9) mv grafana.yaml docker-compose.yaml 
+
 ![image](https://github.com/user-attachments/assets/0b54a2eb-2a08-47f1-bb4f-b80e08d039a6)
 
-9)  sudo docker compose up -d
+10)  sudo docker compose up -d
 
 ![image](https://github.com/user-attachments/assets/0c570ab8-a834-451d-a2a9-01df103301cc)
 
