@@ -209,9 +209,9 @@ _Сохраняем и заходим в графану_
 
 3) Возвращаемся в комнадную строку и прописываем:
 
-- `curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1'`
-
 - `echo -e "# TYPE OILCOINT_metric1 gauge\nOILCOINT_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus`
+
+- `curl -G 'http://localhost:8428/api/v1/query' --data-urlencode 'query=OILCOINT_metric1`
 
 4) Возвращаемся в графану
    
